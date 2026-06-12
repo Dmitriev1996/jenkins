@@ -17,3 +17,22 @@ credentials:
               privateKeySource:
                 fileOnMaster:
                   privateKeyFile: "/var/lib/jenkins/.ssh/id_ed25519"
+
+jobs:
+  - script: >
+      pipelineJob('travel-agency-service') {
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('git@github.com:Dmitriev1996/jenkins.git')
+                  credentials('git-ssh-key')
+                }
+                branches('*/main')
+              }
+            }
+            scriptPath('jobs/travel-agency-service/Jenkinsfile')
+          }
+        }
+      }
