@@ -15,8 +15,8 @@ credentials:
               username: "git"
               description: "SSH key for Git access"
               privateKeySource:
-                directEntry:
-                  privateKey: "${GIT_SSH_PRIVATE_KEY}"
+                fileOnMaster:
+                  privateKeyFile: "/var/lib/jenkins/.ssh/id_ed25519"
 
 jobs:
   - script: >
