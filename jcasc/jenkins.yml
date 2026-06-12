@@ -1,0 +1,38 @@
+jenkins:
+  systemMessage: "Jenkins configured by JCasC (SSH)"
+  numExecutors: 2
+
+unclassified:
+  location:
+    url: "http://192.168.100.6:8080/"
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - basicSSHUserPrivateKey:
+              id: "git-ssh-key"
+              username: "git"
+              description: "SSH key for Git access"
+              privateKeySource:
+                directEntry:
+                  privateKey: "${GIT_SSH_PRIVATE_KEY}"
+
+jobs:
+  - script: >
+      pipelineJob('travel-agency-service') {
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('git@github.com:Dmitriev1996/jenkins.git')
+                  credentials('git-ssh-key')
+                }
+                branches('*/master')
+              }
+            }
+            scriptPath('jobs/travel-agency-service/Jenkinsfile')
+          }
+        }
+      }
