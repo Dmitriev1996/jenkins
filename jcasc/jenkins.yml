@@ -6,18 +6,6 @@ unclassified:
   location:
     url: "http://192.168.100.6:8080/"
 
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-          - basicSSHUserPrivateKey:
-              id: "git-ssh-key"
-              username: "git"
-              description: "SSH key for Git access"
-              privateKeySource:
-                fileOnMaster:
-                  privateKeyFile: "/var/lib/jenkins/.ssh/id_ed25519"
-
 jobs:
   - script: >
       pipelineJob('travel-agency-service') {
